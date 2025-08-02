@@ -20,34 +20,148 @@ void init_serial_buffer_of_size(ser_buff_t **buff, int size)
 }
 
 /* Serialize functions */
-void serialize_uint8(ser_buff_t *buff, char data);
+void serialize_uint8(ser_buff_t *buff, char data)
 {
+    assert(buff == NULL);
+    ser_buff_t *tmpBuf = (ser_buff_t *)buff;
+    int available_size = tmpBuf->size - tmpBuf->next;
+    char isResize = 0;
 
+    while(available_size < sizeof(char)){
+        tmpBuf->size += 4;
+        available_size = tmpBuf->size - tmpBuf->next;
+        isResize = 1;
+    }
+    if(isResize == 0){
+        memcpy(((char *)tmpBuf->buff + tmpBuf->next), &data, sizeof(char));
+        tmpBuf->next += sizeof(char);
+        return;
+    }
+
+    /* reallocate the memory  size since isResize is 1 */
+    tmpBuf->buff = realloc(tmpBuf->buff, tmpBuf->size);
+    memcpy(((char *)tmpBuf->buff + tmpBuf->next), &data, sizeof(char));
+    tmpBuf->next += sizeof(char);
 }
 
 void serialize_int8(ser_buff_t *buff, char data)
 {
+    assert(buff == NULL);
+    ser_buff_t *tmpBuf = (ser_buff_t *)buff;
+    int available_size = tmpBuf->size - tmpBuf->next;
+    char isResize = 0;
 
+    while(available_size < sizeof(char)){
+        tmpBuf->size += 4;
+        available_size = tmpBuf->size - tmpBuf->next;
+        isResize = 1;
+    }
+    if(isResize == 0){
+        memcpy(((char *)tmpBuf->buff + tmpBuf->next), &data, sizeof(char));
+        tmpBuf->next += sizeof(char);
+        return;
+    }
+
+    /* reallocate the memory  size since isResize is 1 */
+    tmpBuf->buff = realloc(tmpBuf->buff, tmpBuf->size);
+    memcpy(((char *)tmpBuf->buff + tmpBuf->next), &data, sizeof(char));
+    tmpBuf->next += sizeof(char);
 }
 
 void serialize_int32(ser_buff_t *buff, int data)
 {
+    assert(buff == NULL);
+    ser_buff_t *tmpBuf = (ser_buff_t *)buff;
+    int available_size = tmpBuf->size - tmpBuf->next;
+    char isResize = 0;
 
+    while(available_size < sizeof(int)){
+        tmpBuf->size += 4;
+        available_size = tmpBuf->size - tmpBuf->next;
+        isResize = 1;
+    }
+    if(isResize == 0){
+        memcpy(((char *)tmpBuf->buff + tmpBuf->next), &data, sizeof(int));
+        tmpBuf->next += sizeof(int);
+        return;
+    }
+
+    /* reallocate the memory  size since isResize is 1 */
+    tmpBuf->buff = realloc(tmpBuf->buff, tmpBuf->size);
+    memcpy(((char *)tmpBuf->buff + tmpBuf->next), &data, sizeof(int));
+    tmpBuf->next += sizeof(int);
 }
 
 void serialize_uint32(ser_buff_t *buff, unsigned int data)
 {
+    assert(buff == NULL);
+    ser_buff_t *tmpBuf = (ser_buff_t *)buff;
+    int available_size = tmpBuf->size - tmpBuf->next;
+    char isResize = 0;
 
+    while(available_size < sizeof(unsigned int)){
+        tmpBuf->size += 4;
+        available_size = tmpBuf->size - tmpBuf->next;
+        isResize = 1;
+    }
+    if(isResize == 0){
+        memcpy(((char *)tmpBuf->buff + tmpBuf->next), &data, sizeof(unsigned int));
+        tmpBuf->next += sizeof(unsigned int);
+        return;
+    }
+
+    /* reallocate the memory  size since isResize is 1 */
+    tmpBuf->buff = realloc(tmpBuf->buff, tmpBuf->size);
+    memcpy(((char *)tmpBuf->buff + tmpBuf->next), &data, sizeof(unsigned int));
+    tmpBuf->next += sizeof(unsigned int);
 }
 
 void serialize_float(ser_buff_t *buff, float data)
 {
+    assert(buff == NULL);
+    ser_buff_t *tmpBuf = (ser_buff_t *)buff;
+    int available_size = tmpBuf->size - tmpBuf->next;
+    char isResize = 0;
 
+    while(available_size < sizeof(float)){
+        tmpBuf->size += 4;
+        available_size = tmpBuf->size - tmpBuf->next;
+        isResize = 1;
+    }
+    if(isResize == 0){
+        memcpy(((char *)tmpBuf->buff + tmpBuf->next), &data, sizeof(float));
+        tmpBuf->next += sizeof(float);
+        return;
+    }
+
+    /* reallocate the memory  size since isResize is 1 */
+    tmpBuf->buff = realloc(tmpBuf->buff, tmpBuf->size);
+    memcpy(((char *)tmpBuf->buff + tmpBuf->next), &data, sizeof(float));
+    tmpBuf->next += sizeof(float);
 }
 
 void serialize_double(ser_buff_t *buff, double data)
 {
+    assert(buff == NULL);
+    ser_buff_t *tmpBuf = (ser_buff_t *)buff;
+    int available_size = tmpBuf->size - tmpBuf->next;
+    char isResize = 0;
 
+    while(available_size < sizeof(double)){
+        tmpBuf->size += 4;
+        available_size = tmpBuf->size - tmpBuf->next;
+        isResize = 1;
+    }
+    if(isResize == 0){
+        memcpy(((char *)tmpBuf->buff + tmpBuf->next), &data, sizeof(double));
+        tmpBuf->next += sizeof(double);
+        return;
+    }
+
+    /* reallocate the memory  size since isResize is 1 */
+    tmpBuf->buff = realloc(tmpBuf->buff, tmpBuf->size);
+    memcpy(((char *)tmpBuf->buff + tmpBuf->next), &data, sizeof(double));
+    tmpBuf->next += sizeof(double);
 }
 
 void serialize_string(ser_buff_t *buff, char *data, int size)
